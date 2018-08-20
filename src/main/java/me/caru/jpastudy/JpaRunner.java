@@ -27,6 +27,15 @@ public class JpaRunner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		Session session = entityManager.unwrap(Session.class);
-		session.save(new Account("caru", "rudeo512"));
+
+		Account account = new Account("caru", "rudeo512");
+
+		Study study = new Study();
+		study.setName("spring data jpa");
+
+		account.addStudy(study);
+
+		session.save(account);
+		session.save(study);
 	}
 }
