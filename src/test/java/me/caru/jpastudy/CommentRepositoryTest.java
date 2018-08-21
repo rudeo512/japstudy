@@ -3,6 +3,7 @@ package me.caru.jpastudy;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,9 @@ public class CommentRepositoryTest extends RepositoryTest {
 		assertThat(comments.size()).isEqualTo(1);
 	}
 
+	@Test
+	public void optional() {
+		Optional<Comment> byId = commentRepository.findById(100L);
+		assertThat(byId).isEmpty();
+	}
 }
