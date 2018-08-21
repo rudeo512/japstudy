@@ -5,14 +5,10 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * PostRepositoryTest
@@ -21,10 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @version 1.0.0
  * @since 2018. 08. 21.
  */
-@RunWith(SpringRunner.class)
-@DataJpaTest(showSql = false)
-@TestPropertySource(locations = "classpath:test.yml")
-public class PostRepositoryTest {
+
+public class PostRepositoryTest extends RepositoryTest {
 
 	@Autowired
 	private PostRepository postRepository;
