@@ -28,14 +28,17 @@ public class JpaRunner implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		Session session = entityManager.unwrap(Session.class);
 
-		Account account = new Account("caru", "rudeo512");
+		Post post = new Post("나는 포스트야");
 
-		Study study = new Study();
-		study.setName("spring data jpa");
+		Comment comment1 = new Comment("댓글1");
+		Comment comment2 = new Comment("댓글2");
 
-		account.addStudy(study);
+		post.addComment(comment1);
+		post.addComment(comment2);
 
-		session.save(account);
-		session.save(study);
+		session.save(post);
+
+		Post p1 =session.get(Post.class, 1L);
+
 	}
 }
