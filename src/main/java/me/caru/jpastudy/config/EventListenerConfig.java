@@ -1,10 +1,10 @@
 package me.caru.jpastudy.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
 
 import lombok.extern.slf4j.Slf4j;
-import me.caru.jpastudy.post.PostPublishedEvent;
+import me.caru.jpastudy.post.PostListener;
 
 /**
  * EventListenerConfig
@@ -16,8 +16,9 @@ import me.caru.jpastudy.post.PostPublishedEvent;
 @Configuration
 @Slf4j
 public class EventListenerConfig {
-	@EventListener
-	public void onApplicationEvent(PostPublishedEvent event) {
-		log.info("PostPublishedEvent event = {}", event.getPost());
+
+	@Bean
+	public PostListener postListener() {
+		return new PostListener();
 	}
 }

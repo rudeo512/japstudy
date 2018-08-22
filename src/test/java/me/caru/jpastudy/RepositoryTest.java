@@ -1,6 +1,9 @@
 package me.caru.jpastudy;
 
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+
+import me.caru.jpastudy.config.EventListenerConfig;
 
 /**
  * RepositoryTest
@@ -11,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
  */
 
 @DataJpaTest(showSql = false)
+@Import(EventListenerConfig.class)
 public abstract class RepositoryTest extends Test {
 
 }

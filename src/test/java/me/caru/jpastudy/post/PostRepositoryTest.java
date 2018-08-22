@@ -6,13 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 
 import me.caru.jpastudy.RepositoryTest;
-import me.caru.jpastudy.config.EventListenerConfig;
 
 /**
  * PostRepositoryTest
@@ -22,7 +20,6 @@ import me.caru.jpastudy.config.EventListenerConfig;
  * @since 2018. 08. 21.
  */
 
-@Import(EventListenerConfig.class)
 public class PostRepositoryTest extends RepositoryTest {
 
 	@Autowired
