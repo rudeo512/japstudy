@@ -14,9 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import me.caru.jpastudy.comment.Comment;
 
 /**
@@ -31,7 +34,8 @@ import me.caru.jpastudy.comment.Comment;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Post {
+@ToString
+public class Post extends AbstractAggregateRoot<Post> {
 
 	@Id
 	@GeneratedValue
@@ -55,5 +59,10 @@ public class Post {
 	public void addComment(Comment comment) {
 		getComments().add(comment);
 		comment.setPost(this);
+	}
+
+	public Post publish() {
+		this.registerEvent(new PostPublishedEvent(this));
+		return this;
 	}
 }
