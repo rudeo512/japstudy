@@ -28,6 +28,8 @@ public class Comment {
 
 	private String content;
 
+	private Integer likeCount = 0;
+
 	@ManyToOne
 	private Post post;
 
