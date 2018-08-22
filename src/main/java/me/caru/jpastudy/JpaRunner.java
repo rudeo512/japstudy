@@ -10,6 +10,9 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import me.caru.jpastudy.comment.Comment;
+import me.caru.jpastudy.post.Post;
+import me.caru.jpastudy.post.PostRepository;
 
 /**
  * JpaRunner

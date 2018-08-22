@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.comment;
 
 import java.util.List;
 
@@ -6,6 +6,9 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import me.caru.jpastudy.post.Post;
+import me.caru.jpastudy.repository.MyRepository;
 
 /**
  * CommentRepository

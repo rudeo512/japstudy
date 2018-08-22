@@ -1,8 +1,9 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.post;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import me.caru.jpastudy.repository.CustomJpaRepository;
 
 /**
  * PostRepository
@@ -11,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1.0.0
  * @since 2018. 08. 21.
  */
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends CustomJpaRepository<Post, Long> {
 	Page<Post> findByTitleContains(String title, Pageable pageable);
 
 	long countByTitleContains(String title);

@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.account.address;
 
 import javax.persistence.Embeddable;
 

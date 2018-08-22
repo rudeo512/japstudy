@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.comment;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,10 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.caru.jpastudy.post.Post;
 
 /**
- * Study
+ * Comment
  *
  * @author kyungdae.cho
  * @version 1.0.0
@@ -19,15 +21,20 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Study {
-
+@NoArgsConstructor
+public class Comment {
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	private String name;
+	private String content;
+
+	private Integer likeCount = 0;
 
 	@ManyToOne
-	private Account creator;
+	private Post post;
 
+	public Comment(String content) {
+		this.content = content;
+	}
 }

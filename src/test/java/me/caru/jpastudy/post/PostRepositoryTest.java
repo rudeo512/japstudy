@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.post;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
+
+import me.caru.jpastudy.RepositoryTest;
 
 /**
  * PostRepositoryTest
@@ -61,7 +63,17 @@ public class PostRepositoryTest extends RepositoryTest {
 		long count = postRepository.countByTitleContains("spring");
 		// Then
 		assertThat(count).isEqualTo(1);
-
 	}
 
+	@Test
+	public void customJpaReposity() {
+		Post post = new Post("hibernate");
+
+		assertThat(postRepository.contains(post)).isFalse();
+
+		postRepository.save(post);
+
+		assertThat(postRepository.contains(post)).isTrue();
+
+	}
 }

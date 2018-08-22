@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.comment;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import me.caru.jpastudy.RepositoryTest;
 
 /**
  * CommentRepositoryTest

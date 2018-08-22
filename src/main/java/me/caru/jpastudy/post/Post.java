@@ -1,5 +1,6 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.post;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,11 +9,15 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.caru.jpastudy.comment.Comment;
 
 /**
  * Post
@@ -33,6 +38,12 @@ public class Post {
 	private Long id;
 
 	private String title;
+
+	@Lob
+	private String content;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Comment> comments = new LinkedList<>();

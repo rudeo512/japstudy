@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.repository;
 
 import java.io.Serializable;
 import java.util.List;

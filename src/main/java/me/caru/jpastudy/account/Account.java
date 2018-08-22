@@ -1,4 +1,4 @@
-package me.caru.jpastudy;
+package me.caru.jpastudy.account;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
+import me.caru.jpastudy.account.address.Address;
+import me.caru.jpastudy.study.Study;
 
 /**
  * Account
