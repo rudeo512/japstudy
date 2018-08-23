@@ -21,6 +21,7 @@
     <properties>
         <java.version>10</java.version>
         <lombok.version>1.18.2</lombok.version>
+        <tomcat.version>9.0.2</tomcat.version>
     </properties>
 
     <dependencies>
@@ -44,6 +45,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- webmvc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- validation -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -60,6 +68,7 @@
             <artifactId>querydsl-jpa</artifactId>
         </dependency>
 
+        <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

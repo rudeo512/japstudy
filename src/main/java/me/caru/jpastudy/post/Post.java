@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -19,7 +18,6 @@ import org.springframework.data.domain.AbstractAggregateRoot;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import me.caru.jpastudy.comment.Comment;
 
 /**
@@ -34,7 +32,6 @@ import me.caru.jpastudy.comment.Comment;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 public class Post extends AbstractAggregateRoot<Post> {
 
 	@Id
@@ -49,7 +46,7 @@ public class Post extends AbstractAggregateRoot<Post> {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	private List<Comment> comments = new LinkedList<>();
 
 	public Post(String title) {
@@ -64,5 +61,15 @@ public class Post extends AbstractAggregateRoot<Post> {
 	public Post publish() {
 		this.registerEvent(new PostPublishedEvent(this));
 		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "Post{" +
+			"id=" + id +
+			", title='" + title + '\'' +
+			", content='" + content + '\'' +
+			", created=" + created +
+			'}';
 	}
 }
