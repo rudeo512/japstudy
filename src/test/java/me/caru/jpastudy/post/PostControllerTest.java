@@ -1,6 +1,6 @@
 package me.caru.jpastudy.post;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.Is.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -39,11 +39,18 @@ public class PostControllerTest extends IntegrationTest {
 	}
 
 	@Test
-	public void getAllPost() throws Exception {
+	public void getPosts() throws Exception {
+		Post post = new Post("springboot");
+		Post result = postRepository.save(post);
 
-		mockMvc.perform(get("/posts"))
+		mockMvc.perform(get("/posts/")
+			.param("page", "0")
+			.param("size", "10")
+			.param("sort", "created,desc")
+			.param("sort", "title")
+		)
 			.andDo(print())
 			.andExpect(status().isOk())
-			.andExpect(content().string(containsString("1")));
+			.andExpect(jsonPath("$.content[0].title", is("springboot")));
 	}
 }

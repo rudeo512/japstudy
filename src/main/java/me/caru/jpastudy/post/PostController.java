@@ -1,7 +1,7 @@
 package me.caru.jpastudy.post;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +29,7 @@ public class PostController {
 	}
 
 	@GetMapping("/posts")
-	public Integer getAllPost() {
-		List<Post> posts = postRepository.findAll();
-		log.info("posts == {}", posts);
-		return posts.size();
+	public Page<Post> getPosts(Pageable pageable) {
+		return postRepository.findAll(pageable);
 	}
 }

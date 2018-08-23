@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.domain.AbstractAggregateRoot;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,6 +34,9 @@ import me.caru.jpastudy.comment.Comment;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIdentityInfo(
+	generator = ObjectIdGenerators.PropertyGenerator.class,
+	property = "id")
 public class Post extends AbstractAggregateRoot<Post> {
 
 	@Id

@@ -10,8 +10,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
-import me.caru.jpastudy.comment.Comment;
-import me.caru.jpastudy.post.Post;
 import me.caru.jpastudy.post.PostRepository;
 
 /**
@@ -35,9 +33,5 @@ public class JpaRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		Post post = new Post("spring");
-		post.addComment(new Comment("hello"));
-		postRepository.save(post);
-
 	}
 }
