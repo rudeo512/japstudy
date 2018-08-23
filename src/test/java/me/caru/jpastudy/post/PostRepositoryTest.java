@@ -3,6 +3,7 @@ package me.caru.jpastudy.post;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 
+import com.querydsl.core.types.Predicate;
 import me.caru.jpastudy.RepositoryTest;
 
 /**
@@ -81,5 +83,15 @@ public class PostRepositoryTest extends RepositoryTest {
 		Post post = new Post("hibernate");
 		postRepository.save(post.publish());
 		postRepository.flush();
+	}
+
+	@Test
+	public void dsl() {
+		Post post = new Post("hibernate");
+		postRepository.save(post);
+
+		Predicate predicate = QPost.post.title.containsIgnoreCase("Hi");
+		Optional<Post> one = postRepository.findOne(predicate);
+		assertThat(one).isNotEmpty();
 	}
 }
