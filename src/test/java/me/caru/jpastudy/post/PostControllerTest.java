@@ -51,6 +51,6 @@ public class PostControllerTest extends IntegrationTest {
 		)
 			.andDo(print())
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.content[0].title", is("springboot")));
+			.andExpect(jsonPath("$._embedded.postList[0].title", is("springboot")));
 	}
 }
