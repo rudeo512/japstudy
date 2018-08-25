@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import me.caru.jpastudy.repository.CustomJpaRepository;
 
@@ -25,6 +26,6 @@ public interface PostRepository extends CustomJpaRepository<Post, Long> {
 
 	List<Post> findByTitleStartingWith(@NotBlank String title);
 
-	@Query("SELECT p FROM Post as p where p.title = ?1")
-	List<Post> findByTitle(@NotBlank String title, Sort sort);
+	@Query("SELECT p FROM #{#entityName} as p where p.title = :title")
+	List<Post> findByTitle(@NotBlank @Param("title") String title, Sort sort);
 }
