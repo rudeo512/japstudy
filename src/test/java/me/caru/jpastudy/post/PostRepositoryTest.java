@@ -7,11 +7,15 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.test.annotation.Rollback;
 
 import com.querydsl.core.types.Predicate;
+import lombok.extern.slf4j.Slf4j;
 import me.caru.jpastudy.RepositoryTest;
 
 /**
@@ -22,6 +26,7 @@ import me.caru.jpastudy.RepositoryTest;
  * @since 2018. 08. 21.
  */
 
+@Slf4j
 public class PostRepositoryTest extends RepositoryTest {
 
 	@Autowired
@@ -93,5 +98,30 @@ public class PostRepositoryTest extends RepositoryTest {
 		Predicate predicate = QPost.post.title.containsIgnoreCase("Hi");
 		Optional<Post> one = postRepository.findOne(predicate);
 		assertThat(one).isNotEmpty();
+	}
+
+	@Test
+	public void findByTitleStartingWith1() {
+		Post post = new Post("hibernate good nice!");
+		postRepository.save(post);
+		List<Post> posts = postRepository.findByTitleStartingWith("hib");
+		assertThat(posts.size()).isEqualTo(1);
+	}
+
+	@Test(expected = InvalidDataAccessApiUsageException.class)
+	public void findByTitleStartingWith2() {
+		Post post = new Post("hibernate good nice!");
+		postRepository.save(post);
+		List<Post> posts = postRepository.findByTitleStartingWith(null);
+		assertThat(posts.size()).isEqualTo(0);
+	}
+
+	@Test
+	public void findByTitle() {
+		Post post = new Post("nice!");
+		postRepository.save(post);
+		List<Post> posts = postRepository.findByTitle("nice!", JpaSort.unsafe(Sort.Direction.DESC, "LENGTH(title)"));
+		log.info("posts = {}", posts);
+		assertThat(posts.size()).isEqualTo(1);
 	}
 }
