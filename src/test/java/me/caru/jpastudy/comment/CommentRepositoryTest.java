@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import me.caru.jpastudy.RepositoryTest;
 import me.caru.jpastudy.post.Post;
@@ -107,13 +108,12 @@ public class CommentRepositoryTest extends RepositoryTest {
 		});
 	}
 
-
 	@Test
 	public void spec() {
 		Comment comment = new Comment("comment");
 		comment.setBest(true);
 
 		commentRepository.save(comment);
-		commentRepository.findAll(CommentSpec.isBest().and(CommentSpec.isGood()));
+		commentRepository.findAll(CommentSpec.isBest().and(CommentSpec.isGood()), PageRequest.of(0, 10));
 	}
 }
