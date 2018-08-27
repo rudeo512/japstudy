@@ -36,6 +36,11 @@ public class Comment {
 
 	private Integer likeCount = 0;
 
+	private Integer up;
+	private Integer down;
+
+	private Boolean best;
+
 	@ManyToOne
 	private Post post;
 

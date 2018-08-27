@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import me.caru.jpastudy.RepositoryTest;
+import me.caru.jpastudy.post.Post;
+import me.caru.jpastudy.post.PostRepository;
 
 /**
  * CommentRepositoryTest
@@ -22,6 +24,9 @@ public class CommentRepositoryTest extends RepositoryTest {
 
 	@Autowired
 	private CommentRepository commentRepository;
+
+	@Autowired
+	private PostRepository postRepository;
 
 	@Test
 	public void test() {
@@ -72,5 +77,43 @@ public class CommentRepositoryTest extends RepositoryTest {
 
 		List<Comment> comments = commentRepository.findByContentContainsIgnoreCaseAndLikeCountGreaterThan("spring", 10);
 		assertThat(comments.size()).isEqualTo(1);
+	}
+
+	@Test
+	public void projection() {
+		Post post = new Post("12213");
+		Post savedPost = postRepository.save(post);
+
+		Comment comment = new Comment("comment");
+		comment.setPost(savedPost);
+		comment.setUp(4);
+		comment.setDown(2);
+		Comment savedComment = commentRepository.save(comment);
+
+		List<CommentView1> commentView1 = commentRepository.findByPost_id(savedPost.getId(), CommentView1.class);
+		assertThat(commentView1.size()).isEqualTo(1);
+		commentView1.stream().forEach(c -> {
+
+			System.out.println("========>");
+			System.out.println(c.getVote());
+		});
+
+		List<CommentView2> commentView2 = commentRepository.findByPost_id(savedPost.getId(), CommentView2.class);
+		assertThat(commentView2.size()).isEqualTo(1);
+
+		commentView2.stream().forEach(c -> {
+			System.out.println("========>");
+			System.out.println(c.getContent());
+		});
+	}
+
+
+	@Test
+	public void spec() {
+		Comment comment = new Comment("comment");
+		comment.setBest(true);
+
+		commentRepository.save(comment);
+		commentRepository.findAll(CommentSpec.isBest().and(CommentSpec.isGood()));
 	}
 }
