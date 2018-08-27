@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+import me.caru.jpastudy.audit.UserAudit;
 import me.caru.jpastudy.post.Post;
 
 /**
@@ -27,7 +29,8 @@ import me.caru.jpastudy.post.Post;
 @JsonIdentityInfo(
 	generator = ObjectIdGenerators.PropertyGenerator.class,
 	property = "id")
-public class Comment {
+@ToString
+public class Comment extends UserAudit {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -46,15 +49,5 @@ public class Comment {
 
 	public Comment(String content) {
 		this.content = content;
-	}
-
-	@Override
-	public String toString() {
-		return "Comment{" +
-			"id=" + id +
-			", content='" + content + '\'' +
-			", likeCount=" + likeCount +
-			", post=" + post +
-			'}';
 	}
 }
